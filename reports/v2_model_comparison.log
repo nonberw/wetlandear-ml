@@ -1,0 +1,37 @@
+species with >=4 recordings: 123 | windows 17132 | recordings 1706
+BirdNET alone (species it can name, same windows): window top1 59.5%
+BirdNET fingerprint / LogReg C=2   window top1 72.5% | top3 82.7% | per-recording 80.6% (1703 rec)
+   (84 s)
+BirdNET fingerprint / MLP 512      window top1 56.5% | top3 76.7% | per-recording 60.9% (1703 rec)
+   (375 s)
+BirdNET + YAMNet / LogReg C=2      window top1 72.4% | top3 82.8% | per-recording 80.5% (1703 rec)
+   (107 s)
+BirdNET + YAMNet / MLP 512         window top1 58.8% | top3 76.7% | per-recording 65.0% (1703 rec)
+   (1054 s)
+
+BEST: ('BirdNET fingerprint', 'LogReg C=2') 72.5%
+temperature 0.70
+  confidence 0.00-0.20:  2532 windows (17%), right 20.5%
+  confidence 0.20-0.35:  1813 windows (12%), right 45.4%
+  confidence 0.35-0.50:  1369 windows (9%), right 66.8%
+  confidence 0.50-0.70:  1722 windows (12%), right 83.9%
+  confidence 0.70-0.90:  2769 windows (19%), right 93.9%
+  confidence 0.90-1.01:  4302 windows (30%), right 98.2%
+  at confidence >= 0.3: covers 74%, precision 88.5%
+  at confidence >= 0.4: covers 67%, precision 91.8%
+  at confidence >= 0.5: covers 61%, precision 94.1%
+  at confidence >= 0.6: covers 55%, precision 95.5%
+
+weakest species (recall of top1 across windows):
+  Aquila nipalensis              5%  (9 recordings)
+  Pelecanus onocrotalus          5%  (8 recordings)
+  Oxyura leucocephala            15%  (4 recordings)
+  Ardea purpurea                 15%  (14 recordings)
+  Calidris pugnax                16%  (16 recordings)
+  Lanius minor                   20%  (12 recordings)
+  Egretta garzetta               28%  (12 recordings)
+  Larus cachinnans               29%  (14 recordings)
+  Tetrax tetrax                  33%  (5 recordings)
+  Aythya nyroca                  35%  (14 recordings)
+  Corvus cornix                  36%  (5 recordings)
+  Hydrocoloeus minutus           38%  (13 recordings)

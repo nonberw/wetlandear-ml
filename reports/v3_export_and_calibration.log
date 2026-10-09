@@ -1,0 +1,26 @@
+classes 213 windows 30584 recordings 2960
+missing=-15            w=0.05  window 71.0%  | Great White Pelican recall 0%
+missing=-15            w=0.10  window 71.5%  | Great White Pelican recall 0%
+missing=-15            w=0.15  window 71.7%  | Great White Pelican recall 0%
+missing=-15            w=0.20  window 71.5%  | Great White Pelican recall 0%
+missing=0 (neutral)    w=0.05  window 70.9%  | Great White Pelican recall 1%
+missing=0 (neutral)    w=0.10  window 71.3%  | Great White Pelican recall 8%
+missing=0 (neutral)    w=0.15  window 71.5%  | Great White Pelican recall 11%
+missing=0 (neutral)    w=0.20  window 71.4%  | Great White Pelican recall 13%
+chosen: missing=0.0 w=0.15 (71.5%)
+LogReg alone 69.7% -> fused 71.5%
+temperature 0.8
+calibration of the final confidence (out-of-fold):
+  0.00-0.20:  3539 windows (14%), right 17.2%
+  0.20-0.35:  2767 windows (11%), right 35.5%
+  0.35-0.50:  2108 windows ( 8%), right 55.3%
+  0.50-0.70:  2526 windows (10%), right 73.1%
+  0.70-0.90:  3740 windows (14%), right 87.4%
+  0.90-1.01: 10835 windows (42%), right 98.1%
+  confidence >= 0.3: covers 78%, precision 86.1%
+  confidence >= 0.4: covers 71%, precision 89.6%
+  confidence >= 0.5: covers 66%, precision 92.1%
+  confidence >= 0.6: covers 61%, precision 94.0%
+per-recording accuracy (mean over windows): 81.8% (2959 recordings)
+exported 214 classes, 403 KB
+sources 2933

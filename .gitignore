@@ -1,0 +1,10 @@
+venv/
+__pycache__/
+*.mp3
+*.wav
+*.npz
+*.npy
+train_audio/
+x/
+feats*/
+.env

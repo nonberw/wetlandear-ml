@@ -1,0 +1,43 @@
+INFO: Created TensorFlow Lite XNNPACK delegate for CPU.
+Warning: Xing stream size off by more than 1%, fuzzy seeking may be even more fuzzy than by design!
+Note: Illegal Audio-MPEG-Header 0x31353531 at offset 378733.
+Note: Trying to resync...
+Note: Hit end of (available) data during resync.
+Note: Illegal Audio-MPEG-Header 0x00000000 at offset 1961.
+Note: Trying to resync...
+Note: Hit end of (available) data during resync.
+Note: Illegal Audio-MPEG-Header 0x00000000 at offset 1961.
+Note: Trying to resync...
+Note: Hit end of (available) data during resync.
+recordings 267, windows 2582, species 28
+species with >=2 recordings (used for honest CV): 24
+
+CV per-window accuracy on unseen recordings (2144 windows):
+  BirdNET alone :  68.8%
+  trained head  :  78.6%
+    Acrocephalus arundinaceus    n= 98  head  94.9%  birdnet  93.9%
+    Alauda arvensis              n=104  head  83.7%  birdnet  57.7%
+    Anser albifrons              n= 66  head  63.6%  birdnet  80.3%
+    Anser anser                  n=157  head  79.6%  birdnet  64.3%
+    Anser erythropus             n= 69  head  94.2%  birdnet  65.2%
+    Anthropoides virgo           n=117  head  89.7%  birdnet  81.2%
+    Botaurus stellaris           n= 43  head  69.8%  birdnet  69.8%
+    Chlidonias hybrida           n= 75  head  82.7%  birdnet  73.3%
+    Cygnus cygnus                n=183  head  86.9%  birdnet  80.3%
+    Cygnus olor                  n=132  head  73.5%  birdnet  39.4%
+    Emberiza schoeniclus         n= 14  head   0.0%  birdnet  50.0%
+    Fulica atra                  n= 78  head  65.4%  birdnet  61.5%
+    Grus grus                    n=183  head  83.6%  birdnet  84.2%
+    Himantopus himantopus        n= 73  head  79.5%  birdnet  74.0%
+    Luscinia svecica             n=100  head  83.0%  birdnet  36.0%
+    Melanocorypha yeltoniensis   n= 23  head  13.0%  birdnet   0.0%
+    Panurus biarmicus            n= 73  head  83.6%  birdnet  89.0%
+    Pelecanus onocrotalus        n= 60  head  23.3%  birdnet   0.0%
+    Phoenicopterus roseus        n=135  head  79.3%  birdnet  71.1%
+    Podiceps cristatus           n= 73  head  69.9%  birdnet  72.6%
+    Recurvirostra avosetta       n= 81  head  79.0%  birdnet  79.0%
+    Tadorna ferruginea           n= 92  head  71.7%  birdnet  68.5%
+    Tringa totanus               n= 35  head  97.1%  birdnet  97.1%
+    Vanellus vanellus            n= 80  head  93.8%  birdnet  87.5%
+
+species with only 1 recording (cannot be cross-validated honestly): [np.str_('Anas platyrhynchos'), np.str_('Ardea cinerea'), np.str_('Pelecanus crispus'), np.str_('Tadorna tadorna')]
