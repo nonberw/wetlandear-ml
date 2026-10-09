@@ -20,7 +20,8 @@ BirdNET V2.4 (Cornell Lab / TU Chemnitz, CC BY-NC-SA) turns every 3-second windo
 |---|---|---|---|---|---|
 | v1 | 24 | 267 | 68.8% | 78.6% | n/a |
 | v2 | 123 | 1,706 | 59.5% | 74.4% | 82.6% |
-| v3 (current) | 213 | 2,960 | 56.9% | **71.5%** | **81.8%** |
+| v3 | 213 | 2,960 | 56.9% | 71.5% | 81.8% |
+| v4 (current) | 222 | 6,214 | 58.2% | **74.7%** | **85.2%** |
 
 (windows = 3-second fragments; "per recording" = mean probability over the fragments of one recording)
 
@@ -50,3 +51,11 @@ Paths at the top of each script point to the author's machine (`C:\Users\Timur\D
 
 ## Fine-tuning on confirmed recordings from the app
 `retrain_with_app.py` merges the exports from the app (Data > Export for training) with the Xeno-canto features, re-evaluates and re-exports the head. Confirmed field recordings are weighted higher than Xeno-canto ones.
+
+## v4: more data and robustness to noise
+- 6,214 recordings (`fetch_xc6.py` tops every species up to 32 recordings, weak species up to 60).
+- `build_noisy.py` makes two noisy copies of the six strongest 3-second fragments of every recording: reed rustle, wind, water, rain (synthetic), real field background and other birds singing (from other recordings), at -3 to +12 dB signal-to-noise. `train_v4.py` compares a head trained on clean data only with one trained on clean plus noisy data, both tested on clean and noisy fragments of held-out recordings.
+- Result on noisy fragments: BirdNET 52.5% (restricted to the same species list), clean-only head 64.4%, clean plus noisy head **68.1%**; on clean fragments 74.7% vs 75.1% (a small price). Weakest: other birds singing at the same time (59%) and strong background (61%). Per-type and per-SNR tables: `reports/v4_train_and_robustness.log`, https://wetlandear.tech/metrics.
+- 208 species are better than BirdNET, 6 equal, 8 worse (Imperial Eagle by 51 points, Greater Scaup by 5, the rest by 1-2).
+- Limits: the noise is simulated, real field audio may behave differently. Weak species (few or poor recordings): Greater Scaup, Saker Falcon, Imperial Eagle, Egyptian Vulture, Steppe Eagle, Smew, Great White Pelican.
+- `final_chain.sh` runs the whole rebuild; `make_species_js.py` writes the species name table for the app.
