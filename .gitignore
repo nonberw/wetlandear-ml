@@ -8,3 +8,4 @@ train_audio/
 x/
 feats*/
 .env
+paper/_pages/
