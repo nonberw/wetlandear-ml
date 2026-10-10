@@ -12,3 +12,8 @@ paper/_pages/
 video/shots/
 video/intro.wav
 video/WetlandEar_intro.mp4
+video/photos/*.jpg
+video/shots_en/
+video/intro2.wav
+video/WetlandEar_intro_v2_EN.mp4
+video/image_candidates.json
