@@ -1,0 +1,30 @@
+species 268 | clean windows 90872 | noisy windows 82264 | recordings 7822
+cross-validation done
+per-species BirdNET weights: held-out recordings 71.21% -> 70.92% (chosen on the other half: 70.96%)
+per-species weights do not help on held-out recordings, keeping one weight
+{
+ "clean": {
+  "birdnet_restricted": 0.6107263944705528,
+  "clean_only_head": 0.7443416109227526,
+  "clean_plus_noisy_head": 0.741723501459596
+ },
+ "noisy": {
+  "birdnet_restricted": 0.5104055236798599,
+  "clean_only_head": 0.6326339589613926,
+  "clean_plus_noisy_head": 0.674936788874842
+ }
+}
+{'type': 'reeds', 'windows': 11595, 'birdnet': 0.4809831824062096, 'clean_only': 0.602501078050884, 'with_noise': 0.6860715825786977}
+{'type': 'wind', 'windows': 11614, 'birdnet': 0.5900637162045806, 'clean_only': 0.7336834854485965, 'with_noise': 0.744101945927329}
+{'type': 'water', 'windows': 11763, 'birdnet': 0.555640567882343, 'clean_only': 0.6916602907421576, 'with_noise': 0.7180991243730341}
+{'type': 'rain', 'windows': 11933, 'birdnet': 0.5283667141540267, 'clean_only': 0.6447666135925585, 'with_noise': 0.6941255342327998}
+{'type': 'bg', 'windows': 11794, 'birdnet': 0.4633712056978124, 'clean_only': 0.5734271663557742, 'with_noise': 0.6080210276411735}
+{'type': 'chorus', 'windows': 11655, 'birdnet': 0.4643500643500644, 'clean_only': 0.5614757614757615, 'with_noise': 0.5981123981123981}
+{'type': 'mix', 'windows': 11910, 'birdnet': 0.4903442485306465, 'clean_only': 0.6212426532325777, 'with_noise': 0.6762384550797649}
+{'lo': -3, 'hi': 0, 'windows': 14162, 'birdnet': 0.450289507131761, 'clean_only': 0.567080920773902, 'with_noise': 0.6289365908769948}
+{'lo': 0, 'hi': 3, 'windows': 14077, 'birdnet': 0.49215031611849114, 'clean_only': 0.6178873339489949, 'with_noise': 0.6686794061234638}
+{'lo': 3, 'hi': 6, 'windows': 16977, 'birdnet': 0.5045060964834777, 'clean_only': 0.6236673146021088, 'with_noise': 0.6665488602226541}
+{'lo': 6, 'hi': 9, 'windows': 17076, 'birdnet': 0.5323846334036074, 'clean_only': 0.6541930194424924, 'with_noise': 0.6891543687046147}
+{'lo': 9, 'hi': 15, 'windows': 19972, 'birdnet': 0.5521229721610255, 'clean_only': 0.6787001802523533, 'with_noise': 0.7069397156018425}
+clean: BirdNET(free) 56.3% -> WetlandEar 74.2% | per recording 85.0%
+exported 269 classes 507 KB; sources 7795

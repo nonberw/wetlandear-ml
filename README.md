@@ -21,7 +21,8 @@ BirdNET V2.4 (Cornell Lab / TU Chemnitz, CC BY-NC-SA) turns every 3-second windo
 | v1 | 24 | 267 | 68.8% | 78.6% | n/a |
 | v2 | 123 | 1,706 | 59.5% | 74.4% | 82.6% |
 | v3 | 213 | 2,960 | 56.9% | 71.5% | 81.8% |
-| v4 (current) | 222 | 6,214 | 58.2% | **74.7%** | **85.2%** |
+| v4 | 222 | 6,214 | 58.2% | 74.7% | 85.2% |
+| v5 (current) | 268 | 7,822 | 56.3% | **74.2%** | **85.0%** |
 
 (windows = 3-second fragments; "per recording" = mean probability over the fragments of one recording)
 
@@ -59,3 +60,11 @@ Paths at the top of each script point to the author's machine (`C:\Users\Timur\D
 - 208 species are better than BirdNET, 6 equal, 8 worse (Imperial Eagle by 51 points, Greater Scaup by 5, the rest by 1-2).
 - Limits: the noise is simulated, real field audio may behave differently. Weak species (few or poor recordings): Greater Scaup, Saker Falcon, Imperial Eagle, Egyptian Vulture, Steppe Eagle, Smew, Great White Pelican.
 - `final_chain.sh` runs the whole rebuild; `make_species_js.py` writes the species name table for the app.
+
+## v5: more species and recordings
+- 7,822 recordings of 268 species (`fetch_xc7.py`: everything usable on Xeno-canto for the rare and weak species, about 100 new species of Kazakhstan with 24 recordings each).
+- Clean fragments 74.2% against 56.3% for BirdNET alone (the lead grew from 16.5 to 17.9 points while the species list grew by 46); per recording 85.0%; on noisy fragments 67.5% against 51.0%.
+- 247 species are better than BirdNET, 8 equal, 13 worse (Carrion Crow -14, Calandra Lark -6, Imperial Eagle -6, Blyth's Reed Warbler -5).
+- A per-species weight of BirdNET's own score in the fusion was tried (`train_v5.py`): on recordings not used for choosing it did not help (71.2% to 70.9%), so one weight is kept.
+- Still weak: Dalmatian Pelican (2 recordings, 0%), Great White Pelican, Egyptian Vulture, Lanner Falcon, Greater Scaup. These species need more and better recordings.
+- Taught voices in the app (`sim_voices*.py`, `make_negatives.py`, `test_worker.js`): with 5 recordings the in-browser classifier finds about 70% of a species' fragments in new recordings at 0.2% false alarms; the previous nearest-sample rule found 36%.
