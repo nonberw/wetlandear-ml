@@ -66,7 +66,7 @@ def fit_pred(tr, te, train_noisy):
 
 
 jobs = [(k, tn) for k in range(5) for tn in (False, True)]
-res = Parallel(n_jobs=10, verbose=0)(delayed(fit_pred)(folds[k][0], folds[k][1], tn) for k, tn in jobs)
+res = Parallel(n_jobs=int(os.environ.get('NJOBS', '5')), verbose=0)(delayed(fit_pred)(folds[k][0], folds[k][1], tn) for k, tn in jobs)
 PA = np.zeros((len(YA), len(classes)), dtype='float32'); PB = PA.copy()
 for (k, tn), P in zip(jobs, res): (PB if tn else PA)[folds[k][1]] = P
 print('cross-validation done', flush=True)
@@ -166,14 +166,25 @@ for sp in use:
     rows.append({'sci': sp, 'en': com, 'ru': ru.get(com, ''), 'recordings': rec_per[sp], 'windows': int(mk.sum()), 'head': float((topB[mk] == sp).mean()), 'birdnet': float((bn_free[:nc][YA[:nc] == sp] == sp).mean()),
                  'head_noisy': float((topB[mn] == sp).mean()) if mn.sum() else None, 'birdnet_noisy': float((bn_top[mn] == sp).mean()) if mn.sum() else None, 'in_birdnet': sp in labels})
 rows.sort(key=lambda r: -r['head'])
-out = {'generated': datetime.date.today().isoformat(), 'version': 'v5', 'species': len(use), 'recordings': int(len(set(GA))), 'windows': int(c.sum()), 'noisy_windows': int(n_.sum()),
+VER = os.environ.get('VERSION', 'v6')
+out = {'generated': datetime.date.today().isoformat(), 'version': VER, 'species': len(use), 'recordings': int(len(set(GA))), 'windows': int(c.sum()), 'noisy_windows': int(n_.sum()),
        'temperature': TB_, 'fusion_weight': W, 'fusion_weight_per_species': bool(WV.std() > 0),
        'window_accuracy': {'birdnet': float((bn_free[sel[:nc]] == Y[sel[:nc]]).mean()), 'wetlandear': report['clean']['clean_plus_noisy_head']}, 'recording_accuracy': ok_rec / nrec,
        'calibration': cal, 'coverage': cover, 'coverage_noisy': cover_noisy,
        'robustness': {'summary': report, 'by_noise_type': by_type, 'by_snr': by_snr},
        'per_species': rows,
        'method': 'Cross-validation split by recording (5 folds): no recording is ever in both training and test. Test windows are 3-second fragments of Xeno-canto recordings; noisy test windows are the same kind of fragments mixed with reed rustle, wind, water, rain, field background or other birds at 12 to -3 dB signal-to-noise.'}
-json.dump(out, open(BASE + r'\metrics_v5.json', 'w', encoding='utf-8'), ensure_ascii=False, indent=1)
+# Fair baselines (added for v6). "birdnet" above is BirdNET's own free top answer WITH the location filter of one fixed point (Korgalzhyn): a species the filter
+# switches off can never be right, so it is not a fair baseline for recordings from other places. The restricted baseline below uses BirdNET's raw scores
+# of our species WITHOUT any location filter.
+for r in rows:
+    mk_ = (YA == r['sci']) & ~isn
+    r['birdnet_restricted'] = float((bn_top[mk_] == r['sci']).mean())
+known_sp = [r['sci'] for r in rows if r['in_birdnet']]
+kn = sel & ~isn & np.isin(YA, known_sp)
+out['known_species'] = {'species': len(known_sp), 'windows': int(kn.sum()), 'birdnet_restricted': acc(bn_top, kn), 'wetlandear': acc(topB, kn)}
+print('species BirdNET knows: %d | their windows: BirdNET(restricted, no location filter) %.1f%% vs WetlandEar %.1f%%' % (len(known_sp), out['known_species']['birdnet_restricted'] * 100, out['known_species']['wetlandear'] * 100), flush=True)
+json.dump(out, open(BASE + r'\metrics_%s.json' % VER, 'w', encoding='utf-8'), ensure_ascii=False, indent=1)
 print('clean: BirdNET(free) %.1f%% -> WetlandEar %.1f%% | per recording %.1f%%' % (out['window_accuracy']['birdnet'] * 100, out['window_accuracy']['wetlandear'] * 100, ok_rec / nrec * 100), flush=True)
 
 if EXPORT:

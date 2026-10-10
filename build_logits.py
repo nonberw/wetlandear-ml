@@ -55,7 +55,7 @@ def do_folder(d):
 
 if __name__ == '__main__':
     os.makedirs(BASE + r'\feats3', exist_ok=True)
-    with Pool(14) as pool:
+    with Pool(int(os.environ.get('NPROC', '3'))) as pool:
         for name, st in pool.imap_unordered(do_folder, sorted(glob.glob(BASE + r'\train_audio\*'))):
             print(name, st, flush=True)
     print('ALLDONE', flush=True)

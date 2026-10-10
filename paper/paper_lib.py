@@ -149,6 +149,9 @@ def CODE(path, start, end=None, caption='', max_lines=60, width=104, shown=None)
             rows.append(('%3d  ' % (first + k) if j == 0 else '     ') + (p if j == 0 else '↳ ' + p.lstrip()))
     if cut: rows.append('     ...')
     txt = '\n'.join(rows)
+    # the report is meant to be shown in public: replace the author's working folder in listings with a neutral name
+    for a in (r'C:\Users\Timur\Documents\wetlandear-models', r'C:\Users\Timur\Documents\wetlandear-app', '/c/Users/Timur/Documents/wetlandear-models', '/c/Users/Timur/Documents/wetlandear-app'):
+        txt = txt.replace(a, '<папка проекта>')
     pre = Preformatted(txt, S['code'])
     t = Table([[pre]], colWidths=[CW])
     t.setStyle(TableStyle([('BACKGROUND', (0, 0), (-1, -1), CODEBG), ('BOX', (0, 0), (-1, -1), .5, LINE), ('LEFTPADDING', (0, 0), (-1, -1), 6), ('RIGHTPADDING', (0, 0), (-1, -1), 4), ('TOPPADDING', (0, 0), (-1, -1), 5), ('BOTTOMPADDING', (0, 0), (-1, -1), 5)]))
