@@ -1,0 +1,23 @@
+species 270 | clean windows 110499 | noisy windows 101902 | recordings 9857
+cross-validation done
+per-species BirdNET weights: held-out recordings 65.89% -> 65.58% (chosen on the other half: 66.29%)
+per-species weights do not help on held-out recordings, keeping one weight
+{
+ "clean": {
+  "birdnet_restricted": 0.5754658251760261,
+  "clean_only_head": 0.7093637300360639,
+  "clean_plus_noisy_head": 0.705467542503864
+ },
+ "noisy": {
+  "birdnet_restricted": 0.45932366391238644,
+  "clean_only_head": 0.5738847127632432,
+  "clean_plus_noisy_head": 0.61539518360778
+ }
+}
+species BirdNET knows: 250 | their windows: BirdNET(restricted, no location filter) 59.2% vs WetlandEar 70.7%
+clean: BirdNET(free) 52.8% -> WetlandEar 70.5% | per recording 82.5%
+Traceback (most recent call last):
+  File "C:\Users\Timur\Documents\wetlandear-models\train_v5.py", line 200, in <module>
+    with open(APP + r'\models\head_training_sources.csv', 'w', newline='', encoding='utf-8') as f: csv.writer(f).writerows(rows_)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+PermissionError: [Errno 13] Permission denied: 'C:\\Users\\Timur\\Documents\\wetlandear-app\\models\\head_training_sources.csv'

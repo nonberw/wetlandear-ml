@@ -1,0 +1,10 @@
+species 270 | clean windows 110499 | noisy windows 101902 | recordings 9857
+recordings by source: {'xc': 7792, 'inat': 2042, 'other': 23}
+cross-validation done
+clean/xc     windows  76095 recordings  7792 | BirdNET 61.1% | head trained on everything 73.6% | head trained without iNaturalist 73.9%
+clean/inat   windows  16840 recordings  2042 | BirdNET 41.4% | head trained on everything 56.8% | head trained without iNaturalist 47.1%
+noisy/xc     windows  81934 recordings  7792 | BirdNET 51.1% | head trained on everything 67.2% | head trained without iNaturalist 67.4%
+noisy/inat   windows  19714 recordings  2042 | BirdNET 24.5% | head trained on everything 37.9% | head trained without iNaturalist 30.5%
+per recording xc    n=7792 | everything 83.2% | without iNaturalist 83.5%
+per recording inat  n=2042 | everything 70.0% | without iNaturalist 58.9%
+done

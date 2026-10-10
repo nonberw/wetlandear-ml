@@ -4,7 +4,8 @@ import base64, json, os, shutil, subprocess, sys, tempfile, time, urllib.request
 import websocket
 
 EDGE = r'C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe'
-OUT = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'shots'); os.makedirs(OUT, exist_ok=True)
+LANGV = os.environ.get('VLANG', 'ru')   # ru or en: the language the site and the app are switched to before the screenshots
+OUT = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'shots' + ('' if LANGV == 'ru' else '_' + LANGV)); os.makedirs(OUT, exist_ok=True)
 PORT = 9333
 SITE = os.environ.get('SITE', 'https://wetlandear.tech')
 APP = os.environ.get('APP', 'https://app.wetlandear.tech')
@@ -62,6 +63,8 @@ def main():
     try:
         # ---- the project site as a visitor sees it: viewport-sized frames while scrolling (blocks reveal themselves on scroll)
         b.viewport(1440, 900, 1); b.go(SITE, 4)
+        if LANGV != 'ru':
+            b.ev("(function(){var t=%r; var els=[].slice.call(document.querySelectorAll('button,a,[role=button]')); var e=els.filter(function(x){return x.textContent.trim().toUpperCase()===t})[0]; if(e) e.click();})()" % LANGV.upper()); time.sleep(2.5)
         h = int(b.ev('document.documentElement.scrollHeight') or 900)
         n_frames = min(7, max(2, h // 800))
         for i in range(n_frames):
@@ -74,7 +77,7 @@ def main():
         if os.environ.get('SITE_ONLY') == '1': return
         # ---- the app on a phone, with the clearly labelled demo data
         b.viewport(390, 844, 2, True); b.go(APP + '/#pulse', 5)
-        b.ev("try{localStorage.setItem('we.lang','ru')}catch(e){}")
+        b.ev("(function(){var e=document.querySelector('[data-lang=\"%s\"]'); if(e) e.click();})()" % LANGV); time.sleep(1.5)
         b.ev("(function(){WEStore.seedDemo(); WEApp.show('pulse'); var s=document.getElementById('signBanner'); if(s) s.hidden=true;})()"); time.sleep(2.5); b.shot('app_pulse')
         b.ev("WEQuick.open()"); time.sleep(1.2); b.shot('app_quick'); b.ev("WEQuick.close()"); time.sleep(0.6)
         b.ev("WEApp.show('science'); setTimeout(function(){var s=document.getElementById('indSug'); if(s) s.click();},400)"); time.sleep(2); b.shot('app_science')
@@ -84,6 +87,7 @@ def main():
         b.ev("WEApp.show('manage')"); time.sleep(2); b.shot('app_manage')
         # ---- desktop view of the app
         b.viewport(1440, 900, 1); b.go(APP + '/#pulse', 4)
+        b.ev("(function(){var e=document.querySelector('[data-lang=\"%s\"]'); if(e) e.click();})()" % LANGV); time.sleep(1.5)
         b.ev("(function(){WEStore.seedDemo(); WEApp.show('pulse'); var s=document.getElementById('signBanner'); if(s) s.hidden=true;})()"); time.sleep(2.5); b.shot('app_desktop')
     finally:
         b.close()
