@@ -228,7 +228,7 @@ def fig_lineage():
     for x, (n, t) in zip(xs, V):
         box(ax, x, 6.4, 4.2, 3.6, n + '\n' + t, fs=8.4, fc=SKY if n != 'v5' else '#DCE8FF')
     for a_, b_ in zip(xs[:-1], xs[1:]): arrow(ax, (a_ + 4.25, 8.2), (b_ - 0.05, 8.2), lw=2)
-    box(ax, 24.6, 6.4, 3.8, 3.6, 'v6\nв процессе:\n+2 042 записи\niNaturalist,\nочистка меток', fs=8.4, fc='#FFFFFF', ls='--', ec=ORANGE)
+    box(ax, 24.6, 6.4, 3.8, 3.6, 'v6\nвыложена:\n+2 042 записи\niNaturalist, +10 п.п.\nна полевых записях', fs=8.4, fc='#FFFFFF', ls='--', ec=ORANGE)
     arrow(ax, (23.75, 8.2), (24.55, 8.2), color=ORANGE, ls='--', lw=1.8)
     rej = [(3.0, 'Нейросеть MLP:\n56,5% — хуже\nлогистической\nрегрессии (v2)'), (6.9, 'Отпечатки YAMNet\nв добавок: 72,4%\nпротив 72,5%,\nпользы нет (v2)'), (10.8, 'Баллы BirdNET как\nпризнаки (stacking):\nлучше по записи,\nне по окну (v2)')]
     for x, t in rej:
